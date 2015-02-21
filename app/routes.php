@@ -100,3 +100,8 @@ Route::get('question/{question_id}' , array( 'uses' => 'QuestionsController@show
 Route::post('answer/create' , array( 'uses' => 'QuestionsController@addAnswer') ) ;
 Route::post('discussion/question/create' , array( 'uses' => 'QuestionsController@addQuesDiscuss') ) ;
 Route::post('discussion/answer/create' , array( 'uses' => 'QuestionsController@addAnsDiscuss') ) ;
+
+
+Route::get('search' , array('uses' => 'HomeController@showSearch')) ;
+Route::post('search' , array('before' => 'csrf' , ' uses' => 'HomeController@showSearch')) ;
+
