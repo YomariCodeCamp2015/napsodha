@@ -107,7 +107,7 @@ a.menu{
                     </button>
 
                     <a class="navbar-brand" href="/"><img alt="Isoconnect" class="img-circle" src="{{asset('assests/icon/iso_logo.png')}}" width="30" height="30"></a>
-                    <a class="navbar-brand" id="title" href="/">NEPSODHA</a>
+                    <a class="navbar-brand" id="title" href="/home">NEPSODHA</a>
 
                     <!-- <a class="navbar-brand" href="/"><img alt="Isoconnect" class="img-circle" src="{{asset('assests/icon/iso_logo.png')}}" width="30" height="30"></a> -->
                     <!-- <a class="navbar-brand" href="/">Nepsodha</a> -->
