@@ -189,7 +189,7 @@ p.title{
                 @if($sections)
                 <ul>
                     @foreach($sections as $section)
-                <p><li><a href='/group/{{$value->id}}'>
+                <p><li><a href='/section/show/{{$section->id}}'>
                 {{{$section->name}}}
                 </a></li></p>
                     @endforeach

@@ -22,10 +22,11 @@ class SectionsController extends \BaseController {
 	public static function showUser($user_id)
 	{
 		$section_ids = SectionUser::where('user_id' , '=' , $user_id )->get();
+		
 		$section_list = array() ;
 		
 		foreach ($section_ids as $section_id) {
-			$section_list[] = $section_id->id ;
+			$section_list[] = $section_id->section_id ;
 		}
 		
 		$section_list =  array_filter($section_list) ;
@@ -53,7 +54,7 @@ class SectionsController extends \BaseController {
 
 		//validate the info , create rules for the inputs
 		$rules = array(
-			'name' => 'required|alpha_dash|min:4|max:32|Unique:sections',
+			'name' => 'required|alpha_dash|min:2|max:32|Unique:sections',
 			'about' => 'required|alpha_spaces|min:4|max:32',
 		);
 
@@ -63,7 +64,7 @@ class SectionsController extends \BaseController {
 
 		//if the validator fails, redirect back to the form
 		if($validator->fails()) {
-			return Redirect::to('/section/create')
+			return Redirect::back()
 				->withErrors($validator) //send back all errors to the
 				->withInput(Input::all());
 		}else{
@@ -75,7 +76,7 @@ class SectionsController extends \BaseController {
 
 			 
 			if($newSection){
-				return Redirect::to('home')->with('flash_notice' , 'Thanks For Register!')
+				return Redirect::back()->with('flash_notice' , 'Thanks For Register!')
 				->withInput(Input::all() );
 			}
 
@@ -85,15 +86,55 @@ class SectionsController extends \BaseController {
 
 
 	public function showById($section_id){
+		
 		$section = Section::find($section_id) ;
 
 		if(!$section)
 			return Redirect::back()->with('flash_notice', 'Requested Section not found') ;
 
-		$questions = Question::where('section_id' , '=' ,$section_id)->orderBy('created_at','desc')->simplePaginate() ;
+		$question_lists = Questionsection::where('section_id' , '=' , $section_id)
+		->orderBy('created_at','desc')->simplePaginate() ;
+
+		if($question_lists){				 
+			$questions = array() ;
+
+			foreach ($question_lists as $question_list) {
+				$questions[] = Question::find($question_list->question_id) ;
+	 
+			}
+		}else{
+			$questions = array() ;
+		}
 
 		return View::make('Section.view')->with('section',$section)
 		->with('questions',$questions) ;
+	}
+
+
+
+	public function user_section_remover($section_id){
+		
+		$section = Section::find($section_id) ;
+
+
+
+		if(!$section)
+			return Redirect::back()->with('flash_error' ,'No section available') ;
+
+		$section_list = SectionUser::where('user_id','=',Auth::id())
+			->where('section_id','=',$section_id)->first() ;
+
+		if(!$section_list)
+			return Redirect::back()->with('flash_error' , 'Not in your section list') ;
+
+		$flag = $section_list->delete();
+
+		if($flag){
+			return Redirect::back()->with('flash_notice' ,'Successfully removed') ;
+		}
+			return Redirect::back()->with('flash_error' ,'Something went wrong') ;
+
+
 	}
 
 
@@ -101,8 +142,16 @@ class SectionsController extends \BaseController {
 		
 		$section = Section::find($section_id) ;
 
-		if(!$Section)
+
+
+		if(!$section)
 			return Redirect::back()->with('flash_error' ,'No section available') ;
+
+		$section_list = SectionUser::where('user_id','=',Auth::id())
+			->where('section_id','=',$section_id)->first() ;
+
+		if($section_list)
+			return Redirect::back()->with('flash_error' , 'Already Added') ;
 
 		$flag = SectionUser::create([
 			'user_id' => Auth::id() ,
