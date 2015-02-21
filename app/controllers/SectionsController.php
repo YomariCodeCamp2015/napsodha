@@ -4,7 +4,24 @@ class SectionsController extends \BaseController {
 
 
 	 
-	public function show($user_id)
+	public function show($section_id){
+		$section = Section::find($section_id) ;
+
+		$question = Question::where('section_id' , '=' , $section->id )->orderBy('create_at' , 'desc')->simplePaginate() ;
+
+		return View::make('section.view')->with('section',$section)->with('questions',$question) ;
+	}
+
+	public function showQuestion($id){
+
+		$question = Question::find($id) ;
+
+		$answers = Answer::where('question_id' ,'=',$question->id )->orderBy('like')->get() ;
+
+		return View::make('question.view')->with('question',$question)->with('answers',$answers) ;
+	}
+
+	public function showUser($user_id)
 	{
 		$section_ids = Section_user::where('user_id' , '=' , $user_id )->get();
 		$section_list = array() ;
@@ -69,6 +86,8 @@ class SectionsController extends \BaseController {
 			return Redirect::to('section/register') ;
 		}
 	}
+
+
 
 	 
 
