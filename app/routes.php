@@ -89,3 +89,6 @@ Route::post('password_reset/{confirmationCode}' , array('before' => 'csrf' ,'use
 
 
 Route::post('question/create' , array('before' => 'csrf' , 'uses' => 'QuestionsController@create') )->before('auth') ;
+
+Route::get('section/create' , array( 'uses' => 'SectionsController@viewCreate') )->before('auth') ;
+Route::post('section/create' , array('before' => 'csrf' , 'uses' => 'SectionsController@create') )->before('auth') ;

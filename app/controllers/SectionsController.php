@@ -32,8 +32,12 @@ class SectionsController extends \BaseController {
 		return $section ;
 	}
 
-	 
-	public function register()
+	public function viewCreate(){
+
+		return View::make('Section.create') ;
+	}
+
+	public function create()
 	{
 		//custom message
 		$messages = array(
@@ -44,7 +48,7 @@ class SectionsController extends \BaseController {
 
 		//validate the info , create rules for the inputs
 		$rules = array(
-			'name' => 'required|alpha_spaces|min:4|max:32',
+			'name' => 'required|alpha_spaces|min:4|max:32|Unique:sections',
 			'about' => 'required|alpha_spaces|min:4|max:32',
 			//'g-recaptcha-response' => 'required|recaptcha'
 		);
@@ -55,7 +59,7 @@ class SectionsController extends \BaseController {
 
 		//if the validator fails, redirect back to the form
 		if($validator->fails()) {
-			return Redirect::to('/section/register')
+			return Redirect::to('/section/create')
 				->withErrors($validator) //send back all errors to the
 				->withInput(Input::all());
 		}else{
@@ -63,19 +67,14 @@ class SectionsController extends \BaseController {
 				'name' => Input::get('name') ,
 				'author_id' => Auth::id() ,
 				'about' => Input::get('about') ,
-				]]);
+				]);
 
 			// Mail::queue('emails.verify', array('confirmation_code' =>$confirmation_code), function($message) {
    //          $message->to(Input::get('email'), Input::get('username'))
    //              ->subject('Verify your email address');
 			// });
-			if($newSection){
-				//Auth::login($newUser);
-				return Redirect::to('home')->with('flash_notice' , 'Thanks For Register!')
-				->withInput(Input::all() );
-			}
+				return Redirect::to('home')->with('flash_notice' , 'Thanks For Register!')->withInput(Input::all() );
 
-			return Redirect::to('section/register') ;
 		}
 	}
 

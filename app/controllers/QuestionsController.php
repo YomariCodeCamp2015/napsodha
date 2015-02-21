@@ -44,10 +44,6 @@ class QuestionsController extends \BaseController {
 				'user_id' => Auth::id(),
 				]);
 
-			// Mail::queue('emails.verify', array('confirmation_code' =>$confirmation_code), function($message) {
-   //          $message->to(Input::get('email'), Input::get('username'))
-   //              ->subject('Verify your email address');
-			// });
 				return Redirect::back()->with('flash_notice' , 'Thanks For Question!<br>Someone will answer your question<br>Be patience');
 
 		}

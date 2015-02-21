@@ -16,7 +16,7 @@ class CreateSectionsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('author_id');
-			$table->string('name');
+			$table->string('name')->unique();
 			$table->string('about');
 			$table->timestamps();
 		});
