@@ -3,9 +3,43 @@
  @section('title')
  Home
  @stop
+ @section('head')
+ <style>
+ p.title{
+    color: black;
+    font-size: 20px;
+    font-weight: bolder;
+ }
+ </style>
+ @stop
+ @section('bodyleft')
+ <div class="container-fluid">
+    <div class="well bs-component">
+        <p class="title">Sections</p>
+
+                <?php 
+                    $sections = SectionUser::where('user_id' , '=' , Auth::user()->id )->get();
+                ?>
+                @if($sections)
+                <ul>
+                    @foreach($sections as $key => $value)
+                <p><li><a href='/group/{{$value->id}}'>
+                {{ e($value->name) }}
+                </a></li></p>
+                    @endforeach
+                </ul>
+                @else
+                    <ul><p>You are not connected to any Group Use search to search</p></ul>
+                @endif
+
+        <a href="{{asset('section/create')}}" > Create New Section </a>
+    </div>
+</div>
+@stop
+ @section('body')
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+        <!-- <div class="row"> -->
+            <div class="col-md-6">
                 <div class="well bs-component">
                         {{ Form::open(array('url' => 'question/create' , 'class' => 'form-horizontal')) }}
                         <fieldset>
@@ -44,9 +78,8 @@
                         {{ Form::close() }}
                 </div>
             </div>
-        </div>
+        <!-- </div> -->
     </div>
+    @stop
 
  
-
-<a href="{{asset('section/create')}}" > Create New Section </a>

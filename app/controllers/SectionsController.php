@@ -28,8 +28,8 @@ class SectionsController extends \BaseController {
 		if(empty($section_list))
 			return null ;
 
-		$section = Section::whereIn('id'  ,$section_list )->get();
-		return $section ;
+		$sections = Section::whereIn('id'  ,$section_list )->get();
+		return $sections ;
 	}
 
 	public function viewCreate(){
