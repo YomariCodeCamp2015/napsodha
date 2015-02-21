@@ -16,7 +16,7 @@ class SectionsController extends \BaseController {
 
 		$question = Question::find($id) ;
 
-		$answers = Answer::where('question_id' ,'=',$question->id )->orderBy('like')->get() ;
+		$answers = Answer::where('question_id' ,'=',$question->id )->orderBy('like')->simplePaginate() ;
 
 		return View::make('question.view')->with('question',$question)->with('answers',$answers) ;
 	}
