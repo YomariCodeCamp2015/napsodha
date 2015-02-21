@@ -1,7 +1,7 @@
 
 @extends('layout')
 @section('head')
-<title>IsoConnect-Login</title>
+<title>Nepsodha-Login</title>
 @stop
 
 @section('body')
