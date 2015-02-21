@@ -3,18 +3,8 @@
  @section('title')
  Section Register
  @stop
- @section('bodyleft')
- <div class="container-fluid">
-    <div class="well bs-component">
-        <p>Sections</p>
-        <a href="{{asset('section/create')}}" > Create New Section </a>
-    </div>
-</div>
- @stop
  @section('body')
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6">
+    
                 <div class="well bs-component">
                         {{ Form::open(array('url' => 'section/create' , 'class' => 'form-horizontal')) }}
                         <fieldset>
@@ -61,9 +51,7 @@
                         </fieldset>
                         {{ Form::close() }}
                 </div>
-            </div>
-        </div>
-    </div>
+           
     @stop
 
  

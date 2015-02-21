@@ -1,11 +1,27 @@
-{{User::find($question->user_id)->name}}{{' :: '}}{{$question->question}}
-<br>
-{{'Likes :: '}}{{$question->like}}
+@extends('layout')
+@section('head')
+<style>
+p.qn{
+	font-size: 16px;
+}
+p.like{
+	font-size: 12px;
+}
+</style>
+@stop
+
+@section('body')
+<div class="row">
+	<div class="col-md-2">
+<p class="title">{{User::find($question->user_id)->name}}</p>
+</div>
+<p class="qn">{{$question->question}}</p>
+<p class="like">{{'Likes :: '}}{{$question->like}}</p>
+</div>
 
 
-{{'<br>'}}
-{{'<br>'}}
-{{'<br>'}}
+
+
 
 <?php 
 
@@ -32,7 +48,7 @@ foreach ($discussions as $discussion) {
 )) }}
 </p>
 <p>{{ Form::submit('Discuss!' , array(
-'class' => 'btn btn-primary'
+'class' => 'btn btn-primary btn-sm'
 )) }}</p>
 <input type="hidden" name="discussion_question_id"  autocomplete="off" value="<?php echo $question->id; ?>">
 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
@@ -55,7 +71,7 @@ foreach ($discussions as $discussion) {
 )) }}
 </p>
 <p>{{ Form::submit('Answer!' , array(
-'class' => 'btn btn-primary'
+'class' => 'btn btn-primary btn-sm'
 )) }}</p>
 <input type="hidden" name="question_id"  autocomplete="off" value="<?php echo $question->id; ?>">
 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
@@ -107,3 +123,5 @@ foreach ($discussions as $discussion) {
 {{ Form::close() }}
 @endif
 @endforeach
+
+@stop
