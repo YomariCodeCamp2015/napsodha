@@ -104,3 +104,4 @@ Route::post('discussion/answer/create' , array( 'uses' => 'QuestionsController@a
 Route::get('search' , array('uses' => 'HomeController@showSearch')) ;
 Route::post('search' , array('before' => 'csrf' , ' uses' => 'HomeController@showSearch')) ;
 
+Route::post('/like' , array('before' => 'csrf' , 'uses' => 'SectionsController@likeHandler'))->before('auth') ;

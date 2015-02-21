@@ -79,6 +79,127 @@ class SectionsController extends \BaseController {
 
 
 
+	public function likeHandler(){
+
+		/*
+
+		{{ Form::open(array('url' => 'like')) }}
+		<p>{{ Form::submit('Discuss!' , array(
+		'class' => 'btn btn-primary'
+		)) }}</p>
+		<input type="hidden" name="discussion_question_id"  autocomplete="off" value="<?php echo $question->id; ?>">
+		<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+		{{ Form::close() }}
+
+		
+
+		*/	
+		$source_id = Input::get('source_id'); //question->id or answer->id
+		$source_type = Input::get('source_type') ; // question or answer
+		$handle = Input::get('handle'); //like or dislike
+
+		switch ($source_type) {
+			case 'question':
+				$question = Question::find($source_id) ;
+					if($question){
+						$like = Like::where('source_type' ,'=' ,$source_type)
+						->where('user_id' ,'=' ,Auth::id())
+						->where('source_id' ,'=' ,$source_id)
+						->first() ;
+						switch ($handle) {
+						case 'like':
+							if($like){
+								if($like->like == 1 ){
+									return Redirect::back()->withErrors(['like' => 'Already Liked']) ;
+								}else{
+									$like->like = 1 ;
+									$like->save() ;
+								}
+							}else{
+								$like = Like::create([
+									'user_id' => Auth::id() ,
+									'source_type' => $source_type ,
+									'source_id' => $section_id ,
+									'like' => 1 ,
+									]);
+							}
+							break;
+						
+						case 'dislike'
+							if($like){
+								if($like->like == 0 ){
+									return Redirect::back()->withErrors(['like' => 'Already DisLiked']) ;
+								}else{
+									$like->like = 0 ;
+									$like->save() ;
+								}
+							}else{
+								$like = Like::create([
+									'user_id' => Auth::id() ,
+									'source_type' => $source_type ,
+									'source_id' => $section_id ,
+									'like' => 0 ,
+									]);
+							}
+							break;
+						}
+				}else{
+					return Redirect::back()->with('flash_error','No Question found');
+				}
+				break;
+			
+			case 'answer':
+				$answer = Answer::find($source_id) ;
+					if($answer){
+						$like = Like::where('source_type' ,'=' ,$source_type)
+						->where('user_id' ,'=' ,Auth::id())
+						->where('source_id' ,'=' ,$source_id)
+						->first() ;
+						switch ($handle) {
+						case 'like':
+							if($like){
+								if($like->like == 1 ){
+									return Redirect::back()->withErrors(['like' => 'Already Liked']) ;
+								}else{
+									$like->like = 1 ;
+									$like->save() ;
+								}
+							}else{
+								$like = Like::create([
+									'user_id' => Auth::id() ,
+									'source_type' => $source_type ,
+									'source_id' => $section_id ,
+									'like' => 1 ,
+									]);
+							}
+							break;
+						
+						case 'dislike'
+							if($like){
+								if($like->like == 0 ){
+									return Redirect::back()->withErrors(['like' => 'Already DisLiked']) ;
+								}else{
+									$like->like = 0 ;
+									$like->save() ;
+								}
+							}else{
+								$like = Like::create([
+									'user_id' => Auth::id() ,
+									'source_type' => $source_type ,
+									'source_id' => $section_id ,
+									'like' => 0 ,
+									]);
+							}
+							break;
+						}
+				}else{
+					return Redirect::back()->with('flash_error','No Answer found');
+				}
+				break;
+
+	}
+
+
 	 
 
 }
