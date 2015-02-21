@@ -170,7 +170,10 @@ a.menu{
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6 col-md-offset-3">
+          <div class="col-md-3">
+            @yield('bodyleft')
+          </div>
+            <div class="col-md-6">
                  @if(Session::has('flash_notice'))
                     <div class="form-group  alert alert-success">
                                 <tr class="danger"><ul>
@@ -187,13 +190,14 @@ a.menu{
                         </div>
                     @endif
             </div>
+            @yield('body')
         </div>
     </div>
 
     <div class="container-fluid">
         
        
-    @yield('body')
+    
     
     </div>
 

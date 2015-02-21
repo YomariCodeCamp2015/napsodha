@@ -16,7 +16,7 @@ class SectionsController extends \BaseController {
 
 	public function showUser($user_id)
 	{
-		$section_ids = Section_user::where('user_id' , '=' , $user_id )->get();
+		$section_ids = SectionUser::where('user_id' , '=' , $user_id )->get();
 		$section_list = array() ;
 		
 		foreach ($section_ids as $section_id) {
@@ -28,8 +28,8 @@ class SectionsController extends \BaseController {
 		if(empty($section_list))
 			return null ;
 
-		$section = Section::whereIn('id'  ,$section_list )->get();
-		return $section ;
+		$sections = Section::whereIn('id'  ,$section_list )->get();
+		return $sections ;
 	}
 
 	public function viewCreate(){
