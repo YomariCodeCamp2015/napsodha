@@ -6,7 +6,7 @@ class QuestionsController extends \BaseController {
 
 			$question = Question::find($id) ;
 
-			$answers = Answer::where('question_id' ,'=',$question->id )->orderBy('like')->simplePaginate() ;
+			$answers = Answer::where('question_id' ,'=',$question->id )->orderBy('like' , 'desc')->simplePaginate() ;
 
 			return View::make('question.show')->with('question',$question)->with('answers',$answers) ;
 		}
