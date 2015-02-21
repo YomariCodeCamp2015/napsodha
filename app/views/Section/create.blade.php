@@ -43,7 +43,7 @@
                                  
                                 <div class="form-group">
                                     <div class="col-lg-10 col-lg-offset-2">
-                                        <p>{{ Form::submit('Submit!' , array('class'=>'btn btn-primary')) }}</p>
+                                        <p>{{ Form::submit('Submit!' , array('class'=>'btn btn-primary btn-sm')) }}</p>
                                     </div>
                                 </div>
 
