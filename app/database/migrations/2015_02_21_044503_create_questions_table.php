@@ -16,6 +16,7 @@ class CreateQuestionsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('user_id');
+			$table->string('section_id');
 			$table->string('question');
 			$table->integer('like'); //question reputation
 			$table->timestamps();

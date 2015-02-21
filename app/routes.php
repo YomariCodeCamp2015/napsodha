@@ -14,6 +14,7 @@
  
 Route::pattern('user_id', '[0-9]+');
 Route::pattern('question_id', '[0-9]+');
+Route::pattern('section_id','[0-9]+');
  
 
   
@@ -106,3 +107,7 @@ Route::get('search' , array('uses' => 'HomeController@showSearch')) ;
 Route::post('search' , array('before' => 'csrf' , ' uses' => 'HomeController@showSearch')) ;
 
 Route::post('/like' , array('before' => 'csrf' , 'uses' => 'SectionsController@likeHandler'))->before('auth') ;
+
+Route::get('user/section/add/{section_id}' , array('uses' => 'SectionsController@user_section_adder'))->before('auth');
+
+Route::get('section/show/{section_id}' , array('uses' => 'SectionsController@showById')) ;

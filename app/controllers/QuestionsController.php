@@ -17,11 +17,13 @@ class QuestionsController extends \BaseController {
 			//custom message
 		$messages = array(
    		 'question.required' => 'You Must Have A question' ,
+   		 'section.required' => 'You Must Belong to one section' ,
 		);
 
 		//validate the info , create rules for the inputs
 		$rules = array(
 			'question' => 'required|min:4',
+			'section' => 'required|min:2',
 		);
 
 
@@ -35,10 +37,15 @@ class QuestionsController extends \BaseController {
 				->withInput(Input::all());
 		}else{
 
+			$section = Section::find(Input::get('section')) ;
+
+			if(!$section)
+				return Redirect::back()->with('flash_error' , 'Section not found ');
 			 
 			$newQuestion = Question::create([
 				'question' => Input::get('question') ,
 				'user_id' => Auth::id(),
+				'section_id' => Input::get('section'),
 				]);
 
 			 
