@@ -29,11 +29,62 @@
 
 nav {
     word-spacing: 2px;
+    background-color: #ffffff;
+}
+.navbar-default {
+  color: black;
+    background-color: #ffffff;
+    border-color: #E7E7E7;
+}
+.navbar-default .navbar-brand {
+  color: black;
+}
+.navbar-default .navbar-nav > li > a {
+   color: black; /*Change active text color here*/
+    }
+    .navbar-default .navbar-nav > li > a:hover {
+   color: black; /*Change active text color here*/
+    }
+}
+.navbar-brand .navbar-nav > a{
+  color: black;
 }
 .save_button {
     min-width: 80px;
     max-width: 600px;
 }
+ a:hover.highlight{
+            display: block;
+            color: black;
+            width: 100px;
+            height: 58px;
+            font-size: 15px;
+            background-color: #FFFFFF;
+            /*border-style: solid;
+            border-color: #ffffff #ffffff #000000;*/
+        }
+a.menu{
+            display: block;
+            width: 100px;
+            height: 58px;
+            
+            color: black;
+            background-color: #ffffff;
+            text-align: center;
+            padding-top: 20px;
+            text-decoration: none;
+            font-size: 12px;
+            /*font-family: "Courier New", Times, Monospace;*/
+            
+        }
+
+#title{
+            width: 150px;
+            font-size: 20px;
+            
+            font-weight: 900;
+            font-family: "Arial", Times, Monospace;
+        }
 
     </style>
 
@@ -55,12 +106,18 @@ nav {
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="/"><img alt="Isoconnect" class="img-circle" src="{{asset('assests/icon/iso_logo.png')}}" width="30" height="30"></a>
-                    <a class="navbar-brand" href="/">IsoConnect</a>
+                    <a class="navbar-brand" id="title" href="/">NEPSODHA</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                     
-                     @if (Auth::check())                    
+
+                     <ul class="nav navbar-nav navbar-left">
+                                                                                                                                                       
+                              <li><a href="/user/message/show" class="menu highlight" >Questions</a></li>
+                              <li><a href="/user/notification/show" class="menu highlight " >Sections</a></li>
+                              <li><a href="/user/notification/show" class="menu highlight" >Users</a></li>
+                    </ul>                     
+                                        
                     <ul class="nav navbar-nav navbar">
                      <li><div class="btn-group ">
                                <form class="navbar-form navbar-left" role="search" method="get" action="<?php echo asset('search') ; ?>">
@@ -70,12 +127,13 @@ nav {
                                 </div>
                               </form></div></li>
                     </ul>
+                     @if (Auth::check())
 
                     <ul class="nav navbar-nav navbar-right">
                                                                                                                                                        
-                              <li><a href="/user/message/show" class="btn btn-primary btn-md " >Messages<span  id="nav-mess">0</span></a></li>
-                              <li><a href="/user/notification/show" class="btn btn-primary btn-md " >Notifications<span id="nav-noti" >0</span></a></li> 
-                                <li><a class="btn btn-primary dropdown-toggle btn-md " type="button" id="menu1" data-toggle="dropdown">{{ Auth::user()->name }}<span class="caret"></span></a>
+                              <li><a href="/user/message/show">Messages<span  id="nav-mess">0</span></a></li>
+                              <li><a href="/user/notification/show">Notifications<span id="nav-noti" >0</span></a></li> 
+                                <li><a class="dropdown-toggle btn-md " type="button" id="menu1" data-toggle="dropdown">{{ Auth::user()->name }}<span class="caret"></span></a>
                                   <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="/user/profile">View Profile</a></li>
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="/user/profile/edit">Edit Profile</a></li>
