@@ -2,85 +2,58 @@
 
 class QuestionsController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 * GET /questions
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
-	}
+	 public function show($id){
 
-	/**
-	 * Show the form for creating a new resource.
-	 * GET /questions/create
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
+			$question = Question::find($id) ;
 
-	/**
-	 * Store a newly created resource in storage.
-	 * POST /questions
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
+			$answers = Answer::where('question_id' ,'=',$question->id )->orderBy('like')->simplePaginate() ;
 
-	/**
-	 * Display the specified resource.
-	 * GET /questions/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
+			return View::make('question.view')->with('question',$question)->with('answers',$answers) ;
+		}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 * GET /questions/{id}/edit
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
 
-	/**
-	 * Update the specified resource in storage.
-	 * PUT /questions/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
+		public function create(){
 
-	/**
-	 * Remove the specified resource from storage.
-	 * DELETE /questions/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
+			//custom message
+		$messages = array(
+   		 //'g-recaptcha-response.required' => 'We need to know if you are a human!',
+   		 'question.required' => 'You Must Have A question' ,
+		);
 
+		//validate the info , create rules for the inputs
+		$rules = array(
+			'question' => 'required|min:4',
+			//'g-recaptcha-response' => 'required|recaptcha'
+		);
+
+
+		// run the validation rules on the inputs from the form
+		$validator = Validator::make(Input::all() ,$rules , $messages) ;
+
+		//if the validator fails, redirect back to the form
+		if($validator->fails()) {
+			return Redirect::back()
+				->withErrors($validator) //send back all errors to the
+				->withInput(Input::all());
+		}else{
+
+			 
+			$newQuestion = Question::create([
+
+				'question' => htmlentities(Input::get('question')) ,
+				]);
+
+			// Mail::queue('emails.verify', array('confirmation_code' =>$confirmation_code), function($message) {
+   //          $message->to(Input::get('email'), Input::get('username'))
+   //              ->subject('Verify your email address');
+			// });
+			if($newQuestion){
+				//Auth::login($newUser);
+				return Redirect::to('home')->with('flash_notice' , 'Thanks For Question!<br>Someone will answer your question<br>Be patience')
+				->withInput(Input::all() );
+			}
+
+			return Redirect::back() ;
+		}
+		}
 }

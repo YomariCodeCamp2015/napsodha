@@ -12,14 +12,7 @@ class SectionsController extends \BaseController {
 		return View::make('section.view')->with('section',$section)->with('questions',$question) ;
 	}
 
-	public function showQuestion($id){
-
-		$question = Question::find($id) ;
-
-		$answers = Answer::where('question_id' ,'=',$question->id )->orderBy('like')->simplePaginate() ;
-
-		return View::make('question.view')->with('question',$question)->with('answers',$answers) ;
-	}
+	
 
 	public function showUser($user_id)
 	{
@@ -66,12 +59,11 @@ class SectionsController extends \BaseController {
 				->withErrors($validator) //send back all errors to the
 				->withInput(Input::all());
 		}else{
-
-			//$confirmation_code = str_random(30);
-
-			$data = Input::only(['name','about']);
-			//$data['confirmation_code'] = $confirmation_code ; 
-			$newSection = Section::create($data);
+			$newSection = Section::create([
+				'name' => Input::get('name') ,
+				'author_id' => Auth::id() ,
+				'about' => Input::get('about') ,
+				]]);
 
 			// Mail::queue('emails.verify', array('confirmation_code' =>$confirmation_code), function($message) {
    //          $message->to(Input::get('email'), Input::get('username'))
