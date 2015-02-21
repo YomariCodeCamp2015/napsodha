@@ -53,11 +53,10 @@ $like = Like::where('user_id' ,'=' ,Auth::id())
 		<input type="hidden" name="source_id"  autocomplete="off" value="<?php echo $question->id; ?>">
 		<input type="hidden" name="source_type"  autocomplete="off" value="question">
 		<input type="hidden" name="handle"  autocomplete="off" value="like">
-		<sinput type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+		<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 		{{ Form::close() }}
-		
+		{{ Form::open(array('url' => 'like')) }}
 		<button type='submit' class='btn btn-primary' ><span class="glyphicon glyphicon-thumbs-down"></span></button>
-		 
 		<input type="hidden" name="source_id"  autocomplete="off" value="<?php echo $question->id; ?>">
 		<input type="hidden" name="source_type"  autocomplete="off" value="question">
 		<input type="hidden" name="handle"  autocomplete="off" value="dislike">
@@ -169,7 +168,7 @@ foreach ($discussions as $discussion) {
 {{'<br>'}}
 </div>
 </div>
-@endforeach
+
 
 
 		{{ Form::open(array('url' => 'like')) }}
@@ -243,8 +242,8 @@ $discussions = Discussion::where('source_type' ,'=' ,'answer')->where('source_id
 <input type="hidden" name="discussion_answer_id"  autocomplete="off" value="<?php echo $answer->id; ?>">
 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 {{ Form::close() }}
+</div>
 @endif
 
-</div>
-
+@endforeach
 @stop

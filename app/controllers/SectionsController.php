@@ -47,12 +47,13 @@ class SectionsController extends \BaseController {
 		//custom message
 		$messages = array(
    		 'name.required' => 'You Must Have A Name' ,
+   		 'name.alpha_dash' => 'Use - _ instead of space' ,
    		 'about.required' => 'Why need this section' ,
 		);
 
 		//validate the info , create rules for the inputs
 		$rules = array(
-			'name' => 'required|alpha_spaces|min:4|max:32|Unique:sections',
+			'name' => 'required|alpha_dash|min:4|max:32|Unique:sections',
 			'about' => 'required|alpha_spaces|min:4|max:32',
 		);
 

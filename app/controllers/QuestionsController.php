@@ -17,7 +17,7 @@ class QuestionsController extends \BaseController {
 			//custom message
 		$messages = array(
    		 'question.required' => 'You Must Have A question' ,
-   		 'section.required' => 'You Must Belong to one section' ,
+   		 'section.required' => 'Your question must belong to one section' ,
 		);
 
 		//validate the info , create rules for the inputs
@@ -37,19 +37,37 @@ class QuestionsController extends \BaseController {
 				->withInput(Input::all());
 		}else{
 
-			$section = Section::find(Input::get('section')) ;
+			$section_list = preg_split('/\s+/', Input::get('section'));
 
+			foreach ($section_list as $sectionName) {
+					 $section = Section::where('name','=',$sectionName)->first() ;
+					 if(!$section)
+					 	return Redirect::back()
+					 	->withErrors(['section' => 'Section: '.$sectionName.' doesnot exists'])
+					  	->withInput(Input::all());
+			}
+
+			 
 			if(!$section)
 				return Redirect::back()->with('flash_error' , 'Section not found ');
 			 
 			$newQuestion = Question::create([
 				'question' => Input::get('question') ,
 				'user_id' => Auth::id(),
-				'section_id' => Input::get('section'),
 				]);
 
 			 
 			if($newQuestion){
+				
+					foreach ($section_list as $sectionName) {
+						 $section = Section::where('name','=',$sectionName)->first() ;
+						
+						$flag = Questionsection::create([
+							'section_id' => $section->id ,
+							'question_id' => $newQuestion->id
+							]) ;
+				}
+
 				return Redirect::back()->with('flash_notice' , 'Thanks For Question!<br>Someone will answer your question<br>Be patience');
 			}
 
