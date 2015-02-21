@@ -41,19 +41,15 @@ class QuestionsController extends \BaseController {
 			$newQuestion = Question::create([
 
 				'question' => htmlentities(Input::get('question')) ,
+				'user_id' => Auth::id(),
 				]);
 
 			// Mail::queue('emails.verify', array('confirmation_code' =>$confirmation_code), function($message) {
    //          $message->to(Input::get('email'), Input::get('username'))
    //              ->subject('Verify your email address');
 			// });
-			if($newQuestion){
-				//Auth::login($newUser);
-				return Redirect::to('home')->with('flash_notice' , 'Thanks For Question!<br>Someone will answer your question<br>Be patience')
-				->withInput(Input::all() );
-			}
+				return Redirect::back()->with('flash_notice' , 'Thanks For Question!<br>Someone will answer your question<br>Be patience');
 
-			return Redirect::back() ;
 		}
 		}
 }
