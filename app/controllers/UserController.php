@@ -221,6 +221,14 @@ class UserController extends BaseController {
 	}	
 
 
+	public function showNotification(){
+		$notifications =  Notification::where('user_id' , Auth::id())->simplePaginate() ;
+
+		return View::make('users.notification')
+		->with('notifications' ,$notifications) ;
+	}
+
+
 
 
 

@@ -112,3 +112,5 @@ Route::get('user/section/add/{section_id}' , array('uses' => 'SectionsController
 Route::get('user/section/remove/{section_id}' , array('uses' => 'SectionsController@user_section_remover'))->before('auth');
 
 Route::get('section/show/{section_id}' , array('uses' => 'SectionsController@showById')) ;
+
+Route::get('notification/show/' , array('uses' => 'UserController@showNotification')) ;

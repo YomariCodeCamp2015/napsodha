@@ -111,6 +111,7 @@ class QuestionsController extends \BaseController {
 
 			 
 			if($newAnswer){
+				Notification::sendNotification('answer',$newAnswer->id) ;
 				return Redirect::back()->with('flash_notice' , 'Thanks For Answer!');
 			}
 
