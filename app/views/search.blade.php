@@ -66,7 +66,7 @@
                                 <h5>No Section Found with "{{{Input::get('user_name')}}}"</h5>
                             @endif
                                 @foreach($lists as $list)
-                                <li><h4><a href="<?php echo asset('sections/'.$list->id.'/profile') ?>">{{{$list->name}}}</a></h4></li>
+                                <li><h4><a href="<?php echo asset('section/show/'.$list->id) ?>">{{{$list->name}}}</a></h4></li>
                                 @endforeach 
                       @endif
                        <?php echo  $lists->appends(Request::except('page'))->links() ; ?>
@@ -78,7 +78,7 @@
                                 <h5>No Section Found with "{{{Input::get('query')}}}"</h5>
                             @else
                             @foreach($sections as $list)
-                            <li><h4><a href="<?php echo asset('section/'.$list->id.'') ?>">{{{$list->name}}}</a></h4>
+                            <li><h4><a href="<?php echo asset('section/show/'.$list->id.'') ?>">{{{$list->name}}}</a></h4>
                                 <h6>{{{$list->about}}}</h6></li>
                             @endforeach
                             <?php  

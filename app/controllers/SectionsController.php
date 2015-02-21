@@ -83,6 +83,38 @@ class SectionsController extends \BaseController {
 	}
 
 
+	public function showById($section_id){
+		$section = Section::find($section_id) ;
+
+		if(!$section)
+			return Redirect::back()->with('flash_notice', 'Requested Section not found') ;
+
+		$questions = Question::where('section_id' , '=' ,$section_id)->orderBy('created_at','desc')->simplePaginate() ;
+
+		return View::make('Section.view')->with('section',$section)
+		->with('questions',$questions) ;
+	}
+
+
+	public function user_section_adder($section_id){
+		
+		$section = Section::find($section_id) ;
+
+		if(!$Section)
+			return Redirect::back()->with('flash_error' ,'No section available') ;
+
+		$flag = SectionUser::create([
+			'user_id' => Auth::id() ,
+			'section_id' => $section_id ,
+			]);
+
+		if($flag){
+			return Redirect::back()->with('flash_notice' ,'Successfully added') ;
+		}
+			return Redirect::back()->with('flash_error' ,'Something went wrong') ;
+
+
+	}
 
 	public function likeHandler(){
 
