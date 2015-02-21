@@ -12,6 +12,11 @@ class SectionsController extends \BaseController {
 		return View::make('section.view')->with('section',$section)->with('questions',$question) ;
 	}
 
+	public function showAll(){
+		
+		return View::make('Section.viewall') ;
+	}
+
 	
 
 	public function showUser($user_id)

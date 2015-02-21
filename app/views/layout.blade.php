@@ -85,6 +85,11 @@ a.menu{
             font-weight: 900;
             font-family: "Arial", Times, Monospace;
         }
+p.title{
+    color: black;
+    font-size: 20px;
+    font-weight: bolder;
+ }
 
     </style>
 
@@ -118,8 +123,8 @@ a.menu{
 
                      <ul class="nav navbar-nav navbar-left">
                                                                                                                                                        
-                              <li><a href="/user/message/show" class="menu highlight" >Questions</a></li>
-                              <li><a href="/user/notification/show" class="menu highlight " >Sections</a></li>
+                              <li><a href="/question/1" class="menu highlight" >Questions</a></li>
+                              <li><a href="/section/show" class="menu highlight " >Sections</a></li>
                               <li><a href="/user/notification/show" class="menu highlight" >Users</a></li>
                     </ul>                     
                                         
@@ -136,7 +141,7 @@ a.menu{
 
                     <ul class="nav navbar-nav navbar-right">
                                                                                                                                                        
-                              <li><a href="/user/message/show">Messages<span  id="nav-mess">0</span></a></li>
+                              
                               <li><a href="/user/notification/show">Notifications<span id="nav-noti" >0</span></a></li> 
                                 <li><a class="dropdown-toggle btn-md " type="button" id="menu1" data-toggle="dropdown">{{ Auth::user()->name }}<span class="caret"></span></a>
                                   <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
@@ -171,7 +176,30 @@ a.menu{
     <div class="container-fluid">
         <div class="row">
           <div class="col-md-3">
-            @yield('bodyleft')
+            
+             <div class="well bs-component">
+              @if (Auth::check())
+                <p class="title">Sections</p>
+
+                <?php 
+                    $sections = SectionUser::where('user_id' , '=' , Auth::user()->id )->get();
+                ?>
+                @if($sections)
+                <ul>
+                    @foreach($sections as $key => $value)
+                <p><li><a href='/group/{{$value->id}}'>
+                {{ e($value->name) }}
+                </a></li></p>
+                    @endforeach
+                </ul>
+                @else
+                    <ul><p>You are not connected to any Group Use search to search</p></ul>
+                @endif
+
+        <a href="{{asset('section/create')}}" > Create New Section </a>
+    </div>
+    @endif
+    @yield('bodyleft')
           </div>
             <div class="col-md-6">
                  @if(Session::has('flash_notice'))
@@ -189,8 +217,9 @@ a.menu{
                                 </ul></tr>
                         </div>
                     @endif
+                    @yield('body')
             </div>
-            @yield('body')
+            
         </div>
     </div>
 
