@@ -13,6 +13,7 @@
 
  
 Route::pattern('user_id', '[0-9]+');
+Route::pattern('question_id', '[0-9]+');
  
 
   
@@ -92,3 +93,9 @@ Route::post('question/create' , array('before' => 'csrf' , 'uses' => 'QuestionsC
 
 Route::get('section/create' , array( 'uses' => 'SectionsController@viewCreate') )->before('auth') ;
 Route::post('section/create' , array('before' => 'csrf' , 'uses' => 'SectionsController@create') )->before('auth') ;
+
+Route::get('question/{question_id}' , array( 'uses' => 'QuestionsController@show') ) ;
+
+Route::post('answer/create' , array( 'uses' => 'QuestionsController@addAnswer') ) ;
+Route::post('discussion/question/create' , array( 'uses' => 'QuestionsController@addQuesDiscuss') ) ;
+Route::post('discussion/answer/create' , array( 'uses' => 'QuestionsController@addAnsDiscuss') ) ;

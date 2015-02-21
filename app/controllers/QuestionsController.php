@@ -8,22 +8,20 @@ class QuestionsController extends \BaseController {
 
 			$answers = Answer::where('question_id' ,'=',$question->id )->orderBy('like')->simplePaginate() ;
 
-			return View::make('question.view')->with('question',$question)->with('answers',$answers) ;
+			return View::make('question.show')->with('question',$question)->with('answers',$answers) ;
 		}
 
 
-		public function create(){
+	public function create(){
 
 			//custom message
 		$messages = array(
-   		 //'g-recaptcha-response.required' => 'We need to know if you are a human!',
    		 'question.required' => 'You Must Have A question' ,
 		);
 
 		//validate the info , create rules for the inputs
 		$rules = array(
 			'question' => 'required|min:4',
-			//'g-recaptcha-response' => 'required|recaptcha'
 		);
 
 
@@ -39,13 +37,149 @@ class QuestionsController extends \BaseController {
 
 			 
 			$newQuestion = Question::create([
-
-				'question' => htmlentities(Input::get('question')) ,
+				'question' => Input::get('question') ,
 				'user_id' => Auth::id(),
 				]);
 
+			 
+			if($newQuestion){
 				return Redirect::back()->with('flash_notice' , 'Thanks For Question!<br>Someone will answer your question<br>Be patience');
+			}
+
+			return Redirect::to('section/create')->with('flash_error' , 'Something went wrong!') ;
 
 		}
 		}
+
+
+	public function addAnswer(){
+		$messages = array(
+   		 'answer.required' => 'Answer field cant be empty' ,
+		);
+
+		//validate the info , create rules for the inputs
+		$rules = array(
+			'answer' => 'required|min:4',
+		);
+
+
+		// run the validation rules on the inputs from the form
+		$validator = Validator::make(Input::all() ,$rules , $messages) ;
+
+		//if the validator fails, redirect back to the form
+		if($validator->fails()) {
+			return Redirect::back()
+				->withErrors($validator) //send back all errors to the
+				->withInput(Input::all());
+		}else{
+
+			$question = Question::find(Input::get('question_id')); 
+			
+			if(!$question)
+				return Redirect::back()->with('flash_error' , 'No question found!') ;
+
+			$newAnswer = Answer::create([
+				'answer' => Input::get('answer') ,
+				'user_id' => Auth::id(),
+				'question_id' => $question->id ,
+				]);
+
+			 
+			if($newAnswer){
+				return Redirect::back()->with('flash_notice' , 'Thanks For Answer!');
+			}
+
+			return Redirect::back()->with('flash_error' , 'Something went wrong!') ;
+
+		}
+		 
+	}
+
+	public function addQuesDiscuss(){
+		$messages = array(
+   		 'discussion.required' => 'Discussion field cant be empty' ,
+		);
+
+		//validate the info , create rules for the inputs
+		$rules = array(
+			'discussion' => 'required|min:4',
+		);
+
+
+		// run the validation rules on the inputs from the form
+		$validator = Validator::make(Input::all() ,$rules , $messages) ;
+
+		//if the validator fails, redirect back to the form
+		if($validator->fails()) {
+			return Redirect::back()
+				->withErrors($validator) //send back all errors to the
+				->withInput(Input::all());
+		}else{
+
+			$question = Question::find(Input::get('discussion_question_id')); 
+		 
+			if(!$question)
+				return Redirect::back()->with('flash_error' , 'No question found!') ;
+
+			$newDiscuss = Discussion::create([
+				'discussion' => Input::get('discussion') ,
+				'user_id' => Auth::id(),
+				'source_id' => $question->id ,
+				'source_type' => 'question' ,
+				]);
+
+			 
+			if($newDiscuss){
+				return Redirect::back() ;
+			}
+
+			return Redirect::back()->with('flash_error' , 'Something went wrong!') ;
+
+		}
+		 
+	}
+
+		public function addAnsDiscuss(){
+		$messages = array(
+   		 'discussion.required' => 'Discussion field cant be empty' ,
+		);
+
+		//validate the info , create rules for the inputs
+		$rules = array(
+			'discussion' => 'required|min:4',
+		);
+
+
+		// run the validation rules on the inputs from the form
+		$validator = Validator::make(Input::all() ,$rules , $messages) ;
+
+		//if the validator fails, redirect back to the form
+		if($validator->fails()) {
+			return Redirect::back()
+				->withErrors($validator) //send back all errors to the
+				->withInput(Input::all());
+		}else{
+
+			$answer = Answer::find(Input::get('discussion_answer_id')); 
+			
+			if(!$answer)
+				return Redirect::back()->with('flash_error' , 'No answer found!') ;
+
+			$newDiscuss = Discussion::create([
+				'discussion' => Input::get('discussion') ,
+				'user_id' => Auth::id(),
+				'source_id' => $answer->id ,
+				'source_type' => 'answer' ,
+				]);
+
+			 
+			if($newDiscuss){
+				return Redirect::back() ;
+			}
+
+			return Redirect::back()->with('flash_error' , 'Something went wrong!') ;
+
+		}
+		 
+	}
 }
