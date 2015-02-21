@@ -15,6 +15,7 @@
     --><style>
         body{
             padding-top: 70px;
+            background-color: #E5E5E5;
         }
 
         .navbar-xs { min-height:28px; height: 45px; }
@@ -87,7 +88,7 @@ a.menu{
         }
 p.title{
     color: black;
-    font-size: 20px;
+    font-size: 14px;
     font-weight: bolder;
  }
 
@@ -176,9 +177,10 @@ p.title{
     <div class="container-fluid">
         <div class="row">
           <div class="col-md-3">
+
             
              <div class="well bs-component">
-              @if (Auth::check())
+                @if (Auth::check())
                 <p class="title">Sections</p>
 
                 <?php 
@@ -197,8 +199,9 @@ p.title{
                 @endif
 
         <a href="{{asset('section/create')}}" > Create New Section </a>
+        @endif
     </div>
-    @endif
+    
     @yield('bodyleft')
           </div>
             <div class="col-md-6">

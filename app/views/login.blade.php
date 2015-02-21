@@ -5,7 +5,7 @@
 @stop
 
 @section('body')
-    <div class="col-lg-6   col-md-offset-3">
+    <!-- <div class="col-lg-6   col-md-offset-3"> -->
     <div class="well bs-component">
         <form class="form-horizontal" method="post" action="">
                 <fieldset>
@@ -53,7 +53,7 @@
                 </fieldset>
             </form>
         </div>
-    </div>
+    <!-- </div> -->
 
  
 @stop
