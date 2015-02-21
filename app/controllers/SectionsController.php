@@ -41,16 +41,14 @@ class SectionsController extends \BaseController {
 	{
 		//custom message
 		$messages = array(
-   		 //'g-recaptcha-response.required' => 'We need to know if you are a human!',
    		 'name.required' => 'You Must Have A Name' ,
-   		 'about.required' => 'Why there is this section' ,
+   		 'about.required' => 'Why need this section' ,
 		);
 
 		//validate the info , create rules for the inputs
 		$rules = array(
 			'name' => 'required|alpha_spaces|min:4|max:32|Unique:sections',
 			'about' => 'required|alpha_spaces|min:4|max:32',
-			//'g-recaptcha-response' => 'required|recaptcha'
 		);
 
 
@@ -69,12 +67,13 @@ class SectionsController extends \BaseController {
 				'about' => Input::get('about') ,
 				]);
 
-			// Mail::queue('emails.verify', array('confirmation_code' =>$confirmation_code), function($message) {
-   //          $message->to(Input::get('email'), Input::get('username'))
-   //              ->subject('Verify your email address');
-			// });
-				return Redirect::to('home')->with('flash_notice' , 'Thanks For Register!')->withInput(Input::all() );
+			 
+			if($newSection){
+				return Redirect::to('home')->with('flash_notice' , 'Thanks For Register!')
+				->withInput(Input::all() );
+			}
 
+			return Redirect::to('section/create')->with('flash_error' , 'Something went wrong!') ;
 		}
 	}
 

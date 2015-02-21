@@ -16,6 +16,7 @@ class CreateAnswersTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('question_id');
+			$table->integer('user_id');
 			$table->string('answer');
 			$table->integer('like'); //reputation of the question
 			$table->timestamps();
