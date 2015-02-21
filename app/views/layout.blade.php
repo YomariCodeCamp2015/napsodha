@@ -112,7 +112,7 @@ p.title{
                         <span class="icon-bar"></span>
                     </button>
 
-                    <a class="navbar-brand" href="/"><img alt="Isoconnect" class="img-circle" src="{{asset('assests/icon/iso_logo.png')}}" width="30" height="30"></a>
+                    <!-- <a class="navbar-brand" href="/"><img alt="Isoconnect" class="img-circle" src="{{asset('assests/icon/iso_logo.png')}}" width="30" height="30"></a> -->
                     <a class="navbar-brand" id="title" href="/home">NEPSODHA</a>
 
                     <!-- <a class="navbar-brand" href="/"><img alt="Isoconnect" class="img-circle" src="{{asset('assests/icon/iso_logo.png')}}" width="30" height="30"></a> -->
@@ -126,7 +126,7 @@ p.title{
                                                                                                                                                        
                               <li><a href="/question/1" class="menu highlight" >Questions</a></li>
                               <li><a href="/section/show" class="menu highlight " >Sections</a></li>
-                              <li><a href="/user/notification/show" class="menu highlight" >Users</a></li>
+                              <!-- <li><a href="/user/notification/show" class="menu highlight" >Users</a></li> -->
                     </ul>                     
                                         
                     <ul class="nav navbar-nav navbar">
@@ -143,7 +143,7 @@ p.title{
                     <ul class="nav navbar-nav navbar-right">
                                                                                                                                                        
                               
-                              <li><a href="/user/notification/show">Notifications<span id="nav-noti" >0</span></a></li> 
+                              <li><a href="/user/notification/show">Notifications<span id="nav-noti" >(0)</span></a></li> 
                                 <li><a class="dropdown-toggle btn-md " type="button" id="menu1" data-toggle="dropdown">{{ Auth::user()->name }}<span class="caret"></span></a>
                                   <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="/user/profile">View Profile</a></li>
@@ -184,18 +184,18 @@ p.title{
                 <p class="title">Sections</p>
 
                 <?php 
-                    $sections = SectionUser::where('user_id' , '=' , Auth::user()->id )->get();
+                    $sections = SectionsController::showUser(Auth::id()) ;
                 ?>
                 @if($sections)
                 <ul>
-                    @foreach($sections as $key => $value)
+                    @foreach($sections as $section)
                 <p><li><a href='/group/{{$value->id}}'>
-                {{ e($value->name) }}
+                {{{$section->name}}}
                 </a></li></p>
                     @endforeach
                 </ul>
                 @else
-                    <ul><p>You are not connected to any Group Use search to search</p></ul>
+                    <ul><p>You are not connected to any section Use search to search</p></ul>
                 @endif
 
         <a href="{{asset('section/create')}}" > Create New Section </a>

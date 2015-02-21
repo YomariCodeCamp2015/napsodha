@@ -20,7 +20,7 @@ class CreateLikesTable extends Migration {
 			$table->integer('user_id');
 			$table->integer('source_id');
 			$table->enum('source_type' , $source_type);
-			$table->enum('like' , array(0,1));
+			$table->enum('like' , array(0,1,2)); //0 is nothing , 1 is liked , 2 is disliked
 			$table->timestamps();
 		});
 	}
