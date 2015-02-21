@@ -5,6 +5,7 @@ Vagrantfile
 .vagrant
 .idea
 
+app/storage/sessions/
 app/config/local
 app/config/app.php
 app/config/database.php
