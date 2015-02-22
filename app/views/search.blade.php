@@ -29,26 +29,19 @@ a:hover.qns{
             /*border-style: solid;
             border-color: #ffffff #ffffff #000000;*/
         }
- span.divider {
-  height: 1px;
-  width:100%;
-  display:block; /* for use on default inline elements like span */
-  margin: 9px 0;
-  overflow: hidden;
-  background-color: #B8B8FF;
-}
+ 
 p.like{
     font-size: 12px;
 }
 </style>
-stop
+@stop
 
 @section('body')
 
-<div class="container-fluid">
+<div class="container">
     <div class="well bs-component">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-6">
             	<form class="navbar-form navbar-left" role="search" method="get" action="">
                         <div class="form-group">
                             <input class="form-control search typeaheadInput" placeholder="Search for Questions" type="text" id="group" name="group_name" autocomplete="off" >

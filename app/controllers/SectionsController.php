@@ -18,6 +18,7 @@ class SectionsController extends \BaseController {
 	}
 
 	
+	
 
 	public static function showUser($user_id)
 	{

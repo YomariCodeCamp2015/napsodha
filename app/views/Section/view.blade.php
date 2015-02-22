@@ -1,7 +1,11 @@
 @extends('layout')
 
+@section('body')
 
-Name:: {{$section->name}}<br>
+
+<div class="well bs-component">
+<div class="container"> 
+<h2>Name : {{$section->name}}</h2><br>
 About:: {{$section->about}}<br>
 
 <?php 
@@ -9,9 +13,9 @@ $usersection = SectionUser::where('user_id','=',Auth::id())
 				->where('section_id','=',$section->id)->first() ;
 ?>
 @if(!$usersection)
-Add to your section :: <a href="{{asset('user/section/add/'.$section->id)}}">{{$section->name}}</a>
+<a class="btn btn-success" href="{{asset('user/section/add/'.$section->id)}}">Add section {{$section->name}}</a>
 @else
-Remove from your section :: <a href="{{asset('user/section/remove/'.$section->id)}}">{{$section->name}}</a>
+<a class="btn btn-danger" href="{{asset('user/section/remove/'.$section->id)}}">Remove section {{$section->name}}</a>
 @endif
 <br>
 
@@ -21,9 +25,12 @@ Remove from your section :: <a href="{{asset('user/section/remove/'.$section->id
 
 @foreach($questions as $question)
 
-<a href="{{asset('question/'.$question->id)}}">{{$question->question}}<br></a>
-{{$question->created_at->diffForHumans()}}
+<a class="btn btn-default" href="{{asset('question/'.$question->id)}}">{{$question->question}}<br>
+{{$question->created_at->diffForHumans()}}</a>
 <br>
 <br>
 
 @endforeach
+</div>
+</div>
+@stop

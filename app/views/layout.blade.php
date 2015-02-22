@@ -128,7 +128,7 @@ p.title{
 
                      <ul class="nav navbar-nav navbar-left">
                                                                                                                                                        
-                              <li><a href="/question/1" class="menu highlight" >Questions</a></li>
+                              <li><a href="/question/show" class="menu highlight" >Questions</a></li>
                               <li><a href="/section/show" class="menu highlight " >Sections</a></li>
                               <li><a href="/about" class="menu highlight " >About</a></li>
                               <!-- <li><a href="/user/notification/show" class="menu highlight" >Users</a></li> -->

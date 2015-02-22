@@ -12,6 +12,14 @@ class QuestionsController extends \BaseController {
 		}
 
 
+
+	public function showQuestionAll(){
+
+		$questions = Question::orderBy('created_at','desc')->simplePaginate() ;
+		return View::make('question.showall')->with('questions',$questions) ;
+	}
+
+
 	public function create(){
 
 			//custom message

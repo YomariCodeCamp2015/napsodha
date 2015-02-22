@@ -97,6 +97,7 @@ Route::get('section/show', array( 'uses' => 'SectionsController@showAll'));
 Route::post('section/create' , array('before' => 'csrf' , 'uses' => 'SectionsController@create') )->before('auth') ;
 
 Route::get('question/{question_id}' , array( 'uses' => 'QuestionsController@show') ) ;
+Route::get('question/show' , array( 'uses' => 'QuestionsController@showQuestionAll') ) ;
 
 Route::post('answer/create' , array( 'uses' => 'QuestionsController@addAnswer') ) ;
 Route::post('discussion/question/create' , array( 'uses' => 'QuestionsController@addQuesDiscuss') ) ;
