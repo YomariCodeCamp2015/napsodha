@@ -78,6 +78,30 @@ a.menu{
             /*font-family: "Courier New", Times, Monospace;*/
             
         }
+a:hover.section{
+            
+            color: black;
+            width: 100px;
+            height: 58px;
+            font-size: 15px;
+            background-color: #FFFFFF;
+            /*border-style: solid;
+            border-color: #ffffff #ffffff #000000;*/
+        }
+a.section{
+            width: 100px;
+            height: 58px;
+            
+            color: black;
+            background-color: #ffffff;
+            text-align: center;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            /*font-family: "Courier New", Times, Monospace;*/
+            
+        }
 
 #title{
             width: 150px;
@@ -194,7 +218,7 @@ p.title{
                 @if($sections)
                 <ul>
                     @foreach($sections as $section)
-                <p><li><a href='/section/show/{{$section->id}}'>
+                <p><li><a class="section" href='/section/show/{{$section->id}}'>
                 {{{$section->name}}}
                 </a></li></p>
                     @endforeach

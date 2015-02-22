@@ -77,7 +77,7 @@ class SectionsController extends \BaseController {
 
 			 
 			if($newSection){
-				return Redirect::back()->with('flash_notice' , 'Thanks For Register!')
+				return Redirect::to('/section/show/'.$newSection->id)->with('flash_notice' , 'Thanks For Register!')
 				->withInput(Input::all() );
 			}
 

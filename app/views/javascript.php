@@ -56,95 +56,95 @@
 </script>
 
 <script>
-//auto suggest search bar
-    $(document).ready(function(){
+// //auto suggest search bar
+//     $(document).ready(function(){
       
-      var users = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        remote: '<?php echo asset('search/query?query=%QUERY&type=users') ?>'
-      });
+//       var users = new Bloodhound({
+//         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+//         queryTokenizer: Bloodhound.tokenizers.whitespace,
+//         remote: '<?php echo asset('search/query?query=%QUERY&type=users') ?>'
+//       });
 
 
-       var groups = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        remote: '<?php echo asset('search/query?query=%QUERY&type=groups') ?>'
-      });
+//        var groups = new Bloodhound({
+//         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+//         queryTokenizer: Bloodhound.tokenizers.whitespace,
+//         remote: '<?php echo asset('search/query?query=%QUERY&type=groups') ?>'
+//       });
 
 
-      users.initialize();
-      groups.initialize();
+//       users.initialize();
+//       groups.initialize();
 
-      $('#users').typeahead({
-        hint: true,
-        highlight: true,
-        minLength: 2
-      }, [{
-        name: 'users',
-        displayKey: 'name',
-        source: users.ttAdapter() ,
-        templates: {
-                        empty: [
-                            '<div class="noitems">',
-                            'No Users Found',
-                            '</div>'
-                        ].join('\n'),
-                         suggestion: Handlebars.compile(
-                          "<div class='row'>"
-                          +"<a href='<?php echo asset('user/') ;?>/{{id}}' >"
-                          +"<div class='col-md-4'>"
-                          +"<img class='img-circle img-responsive img-center' src='<?php echo asset('profile_pic/low/crop/') ;?>/{{profile_pic}}' >"
-                          +"</div>"
-                          +"<div class='col-md'>"
-                          +"<strong>{{name}}</strong>"
-                          +"</a>"
-                          +"<div class='row'>"
-                          +"<div class='col-md'>"
-                          +"<h6>{{company}}</h6>"
-                          +"</div>" 
-                          +"</div>"
-                          +"</div>"
-                          +"</div>"
-                          ),
-                         header: Handlebars.compile("<b>Users</b>")
+//       $('#users').typeahead({
+//         hint: true,
+//         highlight: true,
+//         minLength: 2
+//       }, [{
+//         name: 'users',
+//         displayKey: 'name',
+//         source: users.ttAdapter() ,
+//         templates: {
+//                         empty: [
+//                             '<div class="noitems">',
+//                             'No Users Found',
+//                             '</div>'
+//                         ].join('\n'),
+//                          suggestion: Handlebars.compile(
+//                           "<div class='row'>"
+//                           +"<a href='<?php echo asset('user/') ;?>/{{id}}' >"
+//                           +"<div class='col-md-4'>"
+//                           +"<img class='img-circle img-responsive img-center' src='<?php echo asset('profile_pic/low/crop/') ;?>/{{profile_pic}}' >"
+//                           +"</div>"
+//                           +"<div class='col-md'>"
+//                           +"<strong>{{name}}</strong>"
+//                           +"</a>"
+//                           +"<div class='row'>"
+//                           +"<div class='col-md'>"
+//                           +"<h6>{{company}}</h6>"
+//                           +"</div>" 
+//                           +"</div>"
+//                           +"</div>"
+//                           +"</div>"
+//                           ),
+//                          header: Handlebars.compile("<b>Users</b>")
                        
-                    }
-       } , {
-        name: 'groups',
-        displayKey: 'name',
-        source: groups.ttAdapter() ,
-        templates: {
-                        empty: [
-                            '<div class="noitems">',
-                            'No Groups Found',
-                            '</div>'
-                        ].join('\n'),
-                         suggestion: Handlebars.compile(
-                          "<div class='row'>"
-                          +"<a href='<?php echo asset('user/') ;?>/{{id}}' >"
-                          +"<div class='col-md-4'>"
-                          +"<img class='img-circle img-responsive img-center' src='<?php echo asset('profile_pic/low/crop/') ;?>/{{profile_pic}}' >"
-                          +"</div>"
-                          +"<div class='col-md'>"
-                          +"<strong>{{name}}</strong>"
-                          +"</a>"
-                          +"<div class='row'>"
-                          +"<div class='col-md'>"
-                          +"<h6>{{admin_id}}</h6>"
-                          +"</div>" 
-                          +"</div>"
-                          +"</div>" 
-                          +"</div>"
-                          ),
-                         header: Handlebars.compile("<b>  Groups</b>")
+//                     }
+//        } , {
+//         name: 'groups',
+//         displayKey: 'name',
+//         source: groups.ttAdapter() ,
+//         templates: {
+//                         empty: [
+//                             '<div class="noitems">',
+//                             'No Groups Found',
+//                             '</div>'
+//                         ].join('\n'),
+//                          suggestion: Handlebars.compile(
+//                           "<div class='row'>"
+//                           +"<a href='<?php echo asset('user/') ;?>/{{id}}' >"
+//                           +"<div class='col-md-4'>"
+//                           +"<img class='img-circle img-responsive img-center' src='<?php echo asset('profile_pic/low/crop/') ;?>/{{profile_pic}}' >"
+//                           +"</div>"
+//                           +"<div class='col-md'>"
+//                           +"<strong>{{name}}</strong>"
+//                           +"</a>"
+//                           +"<div class='row'>"
+//                           +"<div class='col-md'>"
+//                           +"<h6>{{admin_id}}</h6>"
+//                           +"</div>" 
+//                           +"</div>"
+//                           +"</div>" 
+//                           +"</div>"
+//                           ),
+//                          header: Handlebars.compile("<b>  Groups</b>")
                        
-                    }
-       }]);
+//                     }
+//        }]);
 
        
 
        
-    });
+//     });
 </script>
 

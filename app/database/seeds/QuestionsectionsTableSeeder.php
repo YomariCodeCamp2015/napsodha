@@ -12,7 +12,8 @@ class QuestionsectionsTableSeeder extends Seeder {
 		foreach(range(1, 10) as $index)
 		{
 			Questionsection::create([
-
+			'section_id' => 1 ,
+			'question_id' => $index,
 			]);
 		}
 	}

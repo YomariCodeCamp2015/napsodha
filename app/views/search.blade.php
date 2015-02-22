@@ -33,6 +33,14 @@ a:hover.qns{
 p.like{
     font-size: 12px;
 }
+span.divider {
+  height: 1px;
+  width:100%;
+  display:block; /* for use on default inline elements like span */
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #B8B8FF;
+}
 </style>
 @stop
 
@@ -74,7 +82,7 @@ p.like{
                             @foreach($questions as $list)
                                 <span class="divider"></span>
                                 <li><h4><a class="qns" href="<?php echo asset('question/'.$list->id) ?>">{{{$list->question}}}</a></h4></li>
-                                <li><p class="like">{{'Likes::'}}<span class="badge">{{$list->like}}</span></p></li>
+                                
                                 @endforeach
                             <?php 
                                 Paginator::setPageName('questions') ;
@@ -103,6 +111,7 @@ p.like{
                                 <h5>No Section Found with "{{{Input::get('user_name')}}}"</h5>
                             @endif
                                 @foreach($lists as $list)
+
                                 <li><h4><a href="<?php echo asset('section/show/'.$list->id) ?>">{{{$list->name}}}</a></h4></li>
                                 @endforeach 
                       @endif
@@ -115,7 +124,8 @@ p.like{
                                 <h5>No Section Found with "{{{Input::get('query')}}}"</h5>
                             @else
                             @foreach($sections as $list)
-                            <li><h4><a href="<?php echo asset('section/show/'.$list->id.'') ?>">{{{$list->name}}}</a></h4>
+                            <span class="divider"></span>
+                            <li><h4><a class="qns" href="<?php echo asset('section/show/'.$list->id.'') ?>">{{{$list->name}}}</a></h4>
                                 <h6>{{{$list->about}}}</h6></li>
                             @endforeach
                             <?php  
