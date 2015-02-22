@@ -74,10 +74,11 @@ a.menu{
             text-align: center;
             padding-top: 20px;
             text-decoration: none;
-            font-size: 12px;
+            font-size: 13px;
             /*font-family: "Courier New", Times, Monospace;*/
             
         }
+<<<<<<< HEAD
 a:hover.section{
             
             color: black;
@@ -102,6 +103,33 @@ a.section{
             /*font-family: "Courier New", Times, Monospace;*/
             
         }
+=======
+    a:hover.section{
+       
+        color: black;
+        width: 100px;
+        height: 58px;
+        font-size: 15px;
+        background-color: #FFFFFF;
+        /*border-style: solid;
+        border-color: #ffffff #ffffff #000000;*/
+    }
+a.section{
+       
+        width: 100px;
+        height: 58px;
+        
+        color: black;
+        background-color: #ffffff;
+        text-align: center;
+        padding-top: 5px;
+        padding-bottom: 20px;
+        text-decoration: none;
+        font-size: 14px;
+        /*font-family: "Courier New", Times, Monospace;*/
+        
+    }
+>>>>>>> 84cdea3dbbcef0bcaa9685cc1a0e90d1508de79a
 
 #title{
             width: 150px;
@@ -112,7 +140,7 @@ a.section{
         }
 p.title{
     color: black;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bolder;
  }
  div.bs-component{
