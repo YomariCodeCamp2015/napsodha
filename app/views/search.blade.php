@@ -3,12 +3,52 @@
 @section('title')
 	Search
 @stop
+@section('head')
+<style>
+li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+ a.qns{
+            color: black;
+            width: 100px;
+            height: 80px;
+            font-size: 15px;
+            background-color: #FFFFFF;
+            /*border-style: solid;
+            border-color: #ffffff #ffffff #000000;*/
+        }
+a:hover.qns{
+            color: black;
+            width: 100px;
+            height: 80px;
+            font-size: 15px;
+            background-color: #FFFFFF;
+            text-decoration: none;
+            /*border-style: solid;
+            border-color: #ffffff #ffffff #000000;*/
+        }
+ span.divider {
+  height: 1px;
+  width:100%;
+  display:block; /* for use on default inline elements like span */
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #B8B8FF;
+}
+p.like{
+    font-size: 12px;
+}
+</style>
+stop
 
 @section('body')
 
 <div class="container-fluid">
+    <div class="well bs-component">
         <div class="row">
-            <div class="col-md-4 col-md-offset-2">
+            <div class="col-md-8">
             	<form class="navbar-form navbar-left" role="search" method="get" action="">
                         <div class="form-group">
                             <input class="form-control search typeaheadInput" placeholder="Search for Questions" type="text" id="group" name="group_name" autocomplete="off" >
@@ -26,7 +66,9 @@
                                 <h5>No Questions Found with "{{{Input::get('group_name')}}}"</h5>
                     @endif
                     @foreach($lists as $list)
-                            <li><h4><a href="<?php echo asset('question/'.$list->id.'') ?>">{{{$list->question}}}</a></h4>
+                    
+                            <li><a href="<?php echo asset('question/'.$list->id.'') ?>">{{{$list->question}}}</a><br>
+                            
                             @endforeach 
                       @endif
             @endif
@@ -37,7 +79,9 @@
                                 <h5>No questions Found with "{{{Input::get('query')}}}"</h5>
                             @else
                             @foreach($questions as $list)
-                                <li><h4><a href="<?php echo asset('question/'.$list->id) ?>">{{{$list->question}}}</a></h4></li>
+                                <span class="divider"></span>
+                                <li><h4><a class="qns" href="<?php echo asset('question/'.$list->id) ?>">{{{$list->question}}}</a></h4></li>
+                                <li><p class="like">{{'Likes::'}}<span class="badge">{{$list->like}}</span></p></li>
                                 @endforeach
                             <?php 
                                 Paginator::setPageName('questions') ;
@@ -96,6 +140,7 @@
                 @endif
               
          </div>
+</div>
 </div>
 </div>
 

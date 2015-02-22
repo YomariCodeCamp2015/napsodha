@@ -15,6 +15,26 @@ p.like{
   overflow: hidden;
   background-color: #B8B8FF;
 }
+button.btn-success{
+	color: #000000;
+	font-size: 18px;
+	background-color: #ffffff;
+	border:0px;
+}
+button.btn-success:hover{
+	color: #000000;
+	font-size: 20px;
+	background-color: #ffffff;
+}
+ button.btn-success:active{
+	color: #000000;
+	font-size: 20px;
+	background-color: #ffffff;
+	border:0px;
+	border-color: #ffffff #ffffff #ffffff;
+}
+
+
 </style>
 @stop
 
@@ -26,12 +46,37 @@ p.like{
 	<div class="col-md-2">
 	<button type="button" class="btn btn-default" aria-label="Left Align">
 	<span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>
+
 <p class="title">{{User::find($question->user_id)->name}}</p>
 </div>
-<p class="qn">{{$question->question}}</p>
+<div class="col-md-10">
+	<p class="qn">{{$question->question}}</p>
+		<div class="col-md-10">
+	
 <p class="like">{{'Likes :: '}}<span class="badge">{{$question->like}}</span>
 <?php echo "\t"; ?>	{{'Answers :: '}}<span class="badge">{{$question->like}}</span>
 {{ 'Discussions::'}}<span class="badge">{{$question->like}}</span></p>
+	</div>
+		<div class="col-md-1" >
+		{{ Form::open(array('url' => 'like')) }}
+		<button type='submit' class='btn btn-success btn-sm' ><span class="glyphicon glyphicon-thumbs-up"></span></button>
+		<input type="hidden" name="source_id"  autocomplete="off" value="<?php echo $question->id; ?>">
+		<input type="hidden" name="source_type"  autocomplete="off" value="question">
+		<input type="hidden" name="handle"  autocomplete="off" value="like">
+		<sinput type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+		{{ Form::close() }}
+	</div>
+	<div class="col-md-1" >
+		{{ Form::open(array('url' => 'like')) }}
+		<button type='submit' class='btn btn-success btn-sm' ><span class="glyphicon glyphicon-thumbs-down"></span></button>
+		<input type="hidden" name="source_id"  autocomplete="off" value="<?php echo $question->id; ?>">
+		<input type="hidden" name="source_type"  autocomplete="off" value="question">
+		<input type="hidden" name="handle"  autocomplete="off" value="dislike">
+		<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+		{{ Form::close() }}
+	</div>
+	
+</div>
 </div>
 
 <?php 
@@ -47,25 +92,6 @@ $like = Like::where('user_id' ,'=' ,Auth::id())
 
 ?>
 <div class="row">
-
-		{{ Form::open(array('url' => 'like')) }}
-		<button type='submit' class='btn btn-success' ><span class="glyphicon glyphicon-thumbs-up"></span></button>
-		<input type="hidden" name="source_id"  autocomplete="off" value="<?php echo $question->id; ?>">
-		<input type="hidden" name="source_type"  autocomplete="off" value="question">
-		<input type="hidden" name="handle"  autocomplete="off" value="like">
-		<sinput type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-		{{ Form::close() }}
-		
-		<button type='submit' class='btn btn-primary' ><span class="glyphicon glyphicon-thumbs-down"></span></button>
-		 
-		<input type="hidden" name="source_id"  autocomplete="off" value="<?php echo $question->id; ?>">
-		<input type="hidden" name="source_type"  autocomplete="off" value="question">
-		<input type="hidden" name="handle"  autocomplete="off" value="dislike">
-		<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-		{{ Form::close() }}
-
-
-{{'Dicuss::<br>'}}
 
 <?php 
 
@@ -152,47 +178,50 @@ foreach ($discussions as $discussion) {
 
 @foreach($answers as $answer)
 <span class="divider"></span>
+<?php $username = User::find($answer->user_id)->name; ?>
 
 <div class="row">
 	<div class="col-md-1">
-
+		<br>
 		<p class="qn"><span class="badge">{{$answer->like}}</span></p>
 	</div>
 	<div class ="col-md-2">
 		<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
 	<span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>
+	<p class="like">{{$username}}</p>
 	</div>
 	<div class="col-md-9">
 	{{$answer->answer}}
-{{'<br>'}}
+<br><br>
+<div class="col-md-10">
 <p class="like">Discussions::<span class="badge">{{$answer->like}}</span></p>
-{{'<br>'}}
 </div>
-</div>
-@endforeach
-
-
+<div class="col-md-1">
 		{{ Form::open(array('url' => 'like')) }}
-		<p>{{ Form::submit('Good!' , array(
-		'class' => 'btn btn-primary'
-		)) }}</p>
+		<button type='submit' class='btn btn-success btn-xs' ><span class="glyphicon glyphicon-thumbs-up"></span></button>
 		<input type="hidden" name="source_id"  autocomplete="off" value="<?php echo $answer->id; ?>">
 		<input type="hidden" name="source_type"  autocomplete="off" value="answer">
 		<input type="hidden" name="handle"  autocomplete="off" value="like">
 		<sinput type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 		{{ Form::close() }}
-		
+		</div>
+		<div class="col-md-1">
 		{{ Form::open(array('url' => 'like')) }}
-		<p>{{ Form::submit('Bad!' , array(
-		'class' => 'btn btn-primary'
-		)) }}</p>
+		<button type='submit' class='btn btn-success btn-xs' ><span class="glyphicon glyphicon-thumbs-down"></span></button>
 		<input type="hidden" name="source_id"  autocomplete="off" value="<?php echo $answer->id; ?>">
 		<input type="hidden" name="source_type"  autocomplete="off" value="answer">
 		<input type="hidden" name="handle"  autocomplete="off" value="dislike">
 		<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 		{{ Form::close() }}
+	
+</div>
+</div>
+</div>
+@endforeach
 
-{{'Dicuss::<br>'}}
+		
+
+
 <?php 
 
 $discussions = Discussion::where('source_type' ,'=' ,'answer')->where('source_id','=',$answer->id)->orderBy('created_at')->get() ;
@@ -236,6 +265,7 @@ $discussions = Discussion::where('source_type' ,'=' ,'answer')->where('source_id
 )) }}
 	</div>
 	<div class="col-md-2">
+		<br><br>
 <p align="center">{{ Form::submit('Discuss!' , array(
 'class' => 'btn btn-primary btn-sm'
 )) }}</p>

@@ -111,3 +111,5 @@ Route::post('/like' , array('before' => 'csrf' , 'uses' => 'SectionsController@l
 Route::get('user/section/add/{section_id}' , array('uses' => 'SectionsController@user_section_adder'))->before('auth');
 
 Route::get('section/show/{section_id}' , array('uses' => 'SectionsController@showById')) ;
+
+Route::get('about', array('uses' => 'HomeController@showAbout'));
