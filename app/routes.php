@@ -113,4 +113,8 @@ Route::get('user/section/remove/{section_id}' , array('uses' => 'SectionsControl
 
 Route::get('section/show/{section_id}' , array('uses' => 'SectionsController@showById')) ;
 
+
+Route::get('about', array('uses' => 'HomeController@showAbout'));
+
 Route::get('notification/show/' , array('uses' => 'UserController@showNotification')) ;
+

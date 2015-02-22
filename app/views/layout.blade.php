@@ -91,6 +91,10 @@ p.title{
     font-size: 14px;
     font-weight: bolder;
  }
+ div.bs-component{
+    background-color:#FFFFFF;
+
+ }
 
     </style>
 
@@ -126,6 +130,7 @@ p.title{
                                                                                                                                                        
                               <li><a href="/question/1" class="menu highlight" >Questions</a></li>
                               <li><a href="/section/show" class="menu highlight " >Sections</a></li>
+                              <li><a href="/about" class="menu highlight " >About</a></li>
                               <!-- <li><a href="/user/notification/show" class="menu highlight" >Users</a></li> -->
                     </ul>                     
                                         

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @extends('layout')
 
 @section('body')
@@ -23,3 +24,6 @@ $sections = Section::orderBy('created_at','desc')->simplePaginate() ;
 </div>
 
 @stop
+=======
+@extends('layout')
+>>>>>>> 86ecf584b1c5efe477ce8c775ed841d532543ae8
