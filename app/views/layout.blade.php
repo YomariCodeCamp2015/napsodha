@@ -148,7 +148,7 @@ p.title{
                     <ul class="nav navbar-nav navbar-right">
                                                                                                                                                        
                               
-                              <li><a href="/user/notification/show">Notifications<span id="nav-noti" >(0)</span></a></li> 
+                              <li><a href="/notification/show">Notifications<span id="nav-noti" >(0)</span></a></li> 
                                 <li><a class="dropdown-toggle btn-md " type="button" id="menu1" data-toggle="dropdown">{{ Auth::user()->name }}<span class="caret"></span></a>
                                   <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="/user/profile">View Profile</a></li>
@@ -194,7 +194,7 @@ p.title{
                 @if($sections)
                 <ul>
                     @foreach($sections as $section)
-                <p><li><a href='/group/{{$value->id}}'>
+                <p><li><a href='/section/show/{{$section->id}}'>
                 {{{$section->name}}}
                 </a></li></p>
                     @endforeach

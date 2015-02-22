@@ -93,6 +93,25 @@ $like = Like::where('user_id' ,'=' ,Auth::id())
 ?>
 <div class="row">
 
+
+		{{ Form::open(array('url' => 'like')) }}
+		<button type='submit' class='btn btn-success' ><span class="glyphicon glyphicon-thumbs-up"></span></button>
+		<input type="hidden" name="source_id"  autocomplete="off" value="<?php echo $question->id; ?>">
+		<input type="hidden" name="source_type"  autocomplete="off" value="question">
+		<input type="hidden" name="handle"  autocomplete="off" value="like">
+		<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+		{{ Form::close() }}
+		{{ Form::open(array('url' => 'like')) }}
+		<button type='submit' class='btn btn-primary' ><span class="glyphicon glyphicon-thumbs-down"></span></button>
+		<input type="hidden" name="source_id"  autocomplete="off" value="<?php echo $question->id; ?>">
+		<input type="hidden" name="source_type"  autocomplete="off" value="question">
+		<input type="hidden" name="handle"  autocomplete="off" value="dislike">
+		<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+		{{ Form::close() }}
+
+
+{{'Dicuss::<br>'}}
+
 <?php 
 
 $discussions = Discussion::where('source_type' ,'=' ,'question')->where('source_id','=',$question->id)->orderBy('created_at')->get() ;
@@ -133,15 +152,9 @@ foreach ($discussions as $discussion) {
 </div>
 </div>
 
-
 <input type="hidden" name="discussion_question_id"  autocomplete="off" value="<?php echo $question->id; ?>">
 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 {{ Form::close() }}
-
-
-
-
-
 
 <div class="row">
 <div class="col-md-10">
@@ -196,7 +209,13 @@ foreach ($discussions as $discussion) {
 <div class="col-md-10">
 <p class="like">Discussions::<span class="badge">{{$answer->like}}</span></p>
 </div>
+
 <div class="col-md-1">
+
+
+
+
+
 		{{ Form::open(array('url' => 'like')) }}
 		<button type='submit' class='btn btn-success btn-xs' ><span class="glyphicon glyphicon-thumbs-up"></span></button>
 		<input type="hidden" name="source_id"  autocomplete="off" value="<?php echo $answer->id; ?>">
@@ -273,8 +292,7 @@ $discussions = Discussion::where('source_type' ,'=' ,'answer')->where('source_id
 <input type="hidden" name="discussion_answer_id"  autocomplete="off" value="<?php echo $answer->id; ?>">
 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 {{ Form::close() }}
-@endif
-
 </div>
+@endif
 
 @stop

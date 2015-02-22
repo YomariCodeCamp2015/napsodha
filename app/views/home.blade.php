@@ -28,6 +28,9 @@
                                                 @if(($errors->has('question')))
                                                     <li><td>{{ $errors->first('question')}}</td></li>
                                                 @endif
+                                                @if(($errors->has('section')))
+                                                    <li><td>{{ $errors->first('section')}}</td></li>
+                                                @endif
                                             </ul>
                                         </tr>
                                     </div>
@@ -40,6 +43,14 @@
                                         {{ Form::text('question' , Input::old('question'),array('placeholder' => 'Write your question here' ,'class'=>'form-control')) }}
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    {{ Form::label('section' , 'Sections'  , array( 'class'=>'col-lg-2 control-label')) }}
+                                    <div class="col-lg-10">
+                                        {{ Form::text('section' , Input::old('section'),array('placeholder' => 'Section separate by spaces ...eg: php mysql' ,'class'=>'form-control')) }}
+                                    </div>
+                                </div>
+
 
     
                                  

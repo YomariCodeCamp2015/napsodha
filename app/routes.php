@@ -109,7 +109,12 @@ Route::post('search' , array('before' => 'csrf' , ' uses' => 'HomeController@sho
 Route::post('/like' , array('before' => 'csrf' , 'uses' => 'SectionsController@likeHandler'))->before('auth') ;
 
 Route::get('user/section/add/{section_id}' , array('uses' => 'SectionsController@user_section_adder'))->before('auth');
+Route::get('user/section/remove/{section_id}' , array('uses' => 'SectionsController@user_section_remover'))->before('auth');
 
 Route::get('section/show/{section_id}' , array('uses' => 'SectionsController@showById')) ;
 
+
 Route::get('about', array('uses' => 'HomeController@showAbout'));
+
+Route::get('notification/show/' , array('uses' => 'UserController@showNotification')) ;
+
