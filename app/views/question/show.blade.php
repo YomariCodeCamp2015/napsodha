@@ -77,7 +77,7 @@ button.btn-success:hover{
 	</div>
 	
 </div>
-</div>
+
 
 <?php 
 
@@ -91,26 +91,7 @@ $like = Like::where('user_id' ,'=' ,Auth::id())
 
 
 ?>
-<div class="row">
 
-
-		{{ Form::open(array('url' => 'like')) }}
-		<button type='submit' class='btn btn-success' ><span class="glyphicon glyphicon-thumbs-up"></span></button>
-		<input type="hidden" name="source_id"  autocomplete="off" value="<?php echo $question->id; ?>">
-		<input type="hidden" name="source_type"  autocomplete="off" value="question">
-		<input type="hidden" name="handle"  autocomplete="off" value="like">
-		<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-		{{ Form::close() }}
-		{{ Form::open(array('url' => 'like')) }}
-		<button type='submit' class='btn btn-primary' ><span class="glyphicon glyphicon-thumbs-down"></span></button>
-		<input type="hidden" name="source_id"  autocomplete="off" value="<?php echo $question->id; ?>">
-		<input type="hidden" name="source_type"  autocomplete="off" value="question">
-		<input type="hidden" name="handle"  autocomplete="off" value="dislike">
-		<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-		{{ Form::close() }}
-
-
-{{'Dicuss::<br>'}}
 
 <?php 
 
