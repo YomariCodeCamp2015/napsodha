@@ -37,106 +37,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function NotificationUnseen()
 	{
-	return $this->hasMany('Notification' , 'user_id')->where('seen','=',0);
+		$nutifi = Notification::where('user_id','=',Auth::id())->where('seen','=',0)->get()->count() ;
+		return $nutifi ;
 	}
 
 
-
-	public function isadmin($group_id)
-		{
-			 $AdminGroups = Group::where('admin_id' , '='  , Auth::id())->get() ;
-
-			 $x =$AdminGroups->count() ; //including user group where he/she is admin
-			
-			 if($x){
-
-				 foreach ($AdminGroups as $UserGroup) {
-				 	
-				 	if($group_id == $UserGroup->id)
-				 		return true; 
-				 		
-				 }
-				 return false ;
-			
-			}else{
-			
-				return false ;
-				
-			}
-		}
-
-	public function group_lists()
-	{
-		 $UserGroups =  UserGroup::where('user_id' , '=' , $this->id )->where('active' , '=' , '1' )->get() ;
-		 $AdminGroups = Group::where('admin_id' , '='  , $this->id)->get() ;
-
-		 $x = $UserGroups->count() + $AdminGroups->count() + 1 ; //including user group where he/she is admin
-		
-		 $groupId[$x] = 0 ;//public post Group is 0
-		 $x-- ;
-		 if($x){
-
-			 foreach($UserGroups as $UserGroup)
-			 {
-
-			 	$groupId[$x] = $UserGroup->group_id ;
-			 
-			 	$x--;
-			 }
-
-			 foreach ($AdminGroups as $UserGroup) {
-			 	
-			 	$groupId[$x] = $UserGroup->id ;
-			 
-			 	$x--;
-			 }
-			 return $groupId ;
-		
-		}else{
-		
-			return $groupId ;
-			
-		}
-	}
-
-	public function groups()
-	{
-	 
-	 $UserGroups =  UserGroup::where('user_id' , '=' , $this->id )->where('active' , '=' , '1' )->get() ;
-	 $AdminGroups = Group::where('admin_id' , '='  , $this->id)->get() ;
-
-		 $x = $UserGroups->count() + $AdminGroups->count() ; 
-		
-		 if($x){
-
-			 foreach($UserGroups as $UserGroup)
-			 {
-
-			 	$groupId[$x] = $UserGroup->group_id ;
-			 
-			 	$x--;
-			 }
-
-			 foreach ($AdminGroups as $UserGroup) {
-			 	
-			 	$groupId[$x] = $UserGroup->id ;
-			 
-			 	$x--;
-			 }
-			
-			 $group = Group::whereIn('id', $groupId )->get() ;
-
-			 return $group ;
-		
-		}else{
-		
-			$group = Null ;
-
-			return $group ;
-			
-		}
-	}
-
+ 
 	public static function unreadmessage(){
 
 		$user_id = Auth::id() ;

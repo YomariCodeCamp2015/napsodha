@@ -56,6 +56,9 @@ switch ($notification->source_type) {
 					break;
 			}
 
+			$notification->seen = 1 ;
+			$notification->save() ;
+
 
 ?>
 
