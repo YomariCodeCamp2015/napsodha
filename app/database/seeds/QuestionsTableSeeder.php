@@ -13,6 +13,9 @@ class QuestionsTableSeeder extends Seeder {
 		{
 			Question::create([
 
+				'user_id' => $index ,
+				'question' => $faker->text ,
+				'like' => $index ,
 			]);
 		}
 	}

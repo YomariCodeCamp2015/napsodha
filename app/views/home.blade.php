@@ -65,6 +65,49 @@
                         </fieldset>
                         {{ Form::close() }}
                 </div>
+                <div class="well bs-component">
+
+                 <?php 
+                    $sections = SectionsController::showUser(Auth::id()) ;
+                ?>
+
+                @if($sections)
+                @foreach($sections as $section)
+
+                <h3>{{$section->name}} <h5>Recent Questions</h5></h3>
+
+                <?php 
+
+
+                    $question_lists = Questionsection::where('section_id' , '=' , $section->id)
+                    ->orderBy('created_at','desc')->simplePaginate(4) ;
+
+                    if($question_lists){                 
+                        $questions = array() ;
+
+                        foreach ($question_lists as $question_list) {
+                            $questions[] = Question::find($question_list->question_id) ;
+                 
+                        }
+                    }else{
+                        $questions = array() ;
+                    }
+
+                 ?>
+                <div class="row">
+                @foreach($questions as $question)
+                <a href="{{asset('question/'.$question->id)}}"><div class="col-md-3">
+                {{$question->question}}
+                </div></a>
+                @endforeach
+                </div>
+                
+
+                @endforeach
+                @else
+                    Add some section Use search bar
+                @endif
+                </div>
            <!--  </div>
         </div>
     </div> -->

@@ -233,7 +233,7 @@ $discussions = Discussion::where('source_type' ,'=' ,'question')->where('source_
 </div>
 </div>
 </div>
-@endforeach
+
 
 		
 
@@ -291,5 +291,5 @@ $discussions = Discussion::where('source_type' ,'=' ,'answer')->where('source_id
 {{ Form::close() }}
 </div>
 @endif
-
+@endforeach
 @stop

@@ -12,9 +12,33 @@ class AnswersTableSeeder extends Seeder {
 		foreach(range(1, 10) as $index)
 		{
 			Answer::create([
-
+				'question_id' => 1 ,
+				'user_id' => $index ,
+				'answer' => $faker->text ,
+				'like' => $index ,
 			]);
 		}
+	
+		foreach(range(1, 10) as $index)
+		{
+			Answer::create([
+				'question_id' => 2 ,
+				'user_id' => $index ,
+				'answer' => $faker->text ,
+				'like' => $index ,
+			]);
+		}
+
+		foreach(range(1, 10) as $index)
+		{
+			Answer::create([
+				'question_id' => 3 ,
+				'user_id' => $index ,
+				'answer' => $faker->text ,
+				'like' => $index ,
+			]);
+		}
+
 	}
 
 }
