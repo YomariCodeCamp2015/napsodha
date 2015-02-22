@@ -74,10 +74,35 @@ a.menu{
             text-align: center;
             padding-top: 20px;
             text-decoration: none;
-            font-size: 12px;
+            font-size: 13px;
             /*font-family: "Courier New", Times, Monospace;*/
             
         }
+    a:hover.section{
+       
+        color: black;
+        width: 100px;
+        height: 58px;
+        font-size: 15px;
+        background-color: #FFFFFF;
+        /*border-style: solid;
+        border-color: #ffffff #ffffff #000000;*/
+    }
+a.section{
+       
+        width: 100px;
+        height: 58px;
+        
+        color: black;
+        background-color: #ffffff;
+        text-align: center;
+        padding-top: 5px;
+        padding-bottom: 20px;
+        text-decoration: none;
+        font-size: 14px;
+        /*font-family: "Courier New", Times, Monospace;*/
+        
+    }
 
 #title{
             width: 150px;
@@ -88,7 +113,7 @@ a.menu{
         }
 p.title{
     color: black;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bolder;
  }
  div.bs-component{
@@ -194,7 +219,7 @@ p.title{
                 @if($sections)
                 <ul>
                     @foreach($sections as $section)
-                <p><li><a href='/section/show/{{$section->id}}'>
+                <p><li><a class="section" href='/section/show/{{$section->id}}'>
                 {{{$section->name}}}
                 </a></li></p>
                     @endforeach
@@ -245,7 +270,7 @@ p.title{
          <div class="container"><hr>
             <div class="row">
                 <div class="col-lg-12">
-                    <p><!-- Copyright &copy;  -->ComHunter 2015-<?php echo date("Y") ; ?><span class="text-muted pull-right" ><a href="<?php echo asset('about') ;?>">About Us</a></span></p>
+                    <p><!-- Copyright &copy;  -->CompHunter 2015-<?php echo date("Y") ; ?><span class="text-muted pull-right" ><a href="<?php echo asset('about') ;?>">About Us</a></span></p>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
