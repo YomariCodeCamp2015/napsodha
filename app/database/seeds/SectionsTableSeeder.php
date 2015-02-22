@@ -12,7 +12,9 @@ class SectionsTableSeeder extends Seeder {
 		foreach(range(1, 10) as $index)
 		{
 			Section::create([
-
+			'name' =>  $faker->text ,
+			'author_id' => $index ,
+			'about' => $faker->text ,
 			]);
 		}
 	}

@@ -245,7 +245,7 @@ p.title{
          <div class="container"><hr>
             <div class="row">
                 <div class="col-lg-12">
-                    <p><!-- Copyright &copy;  -->ComHunter 2015-<?php echo date("Y") ; ?><span class="text-muted pull-right" ><a href="<?php echo asset('about') ;?>">About Us</a></span></p>
+                    <p><!-- Copyright &copy;  -->CompHunter 2015-<?php echo date("Y") ; ?><span class="text-muted pull-right" ><a href="<?php echo asset('about') ;?>">About Us</a></span></p>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

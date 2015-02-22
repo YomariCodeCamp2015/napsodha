@@ -217,7 +217,7 @@ foreach ($discussions as $discussion) {
 </div>
 </div>
 </div>
-@endforeach
+
 
 		
 
@@ -275,5 +275,5 @@ $discussions = Discussion::where('source_type' ,'=' ,'answer')->where('source_id
 {{ Form::close() }}
 </div>
 @endif
-
+@endforeach
 @stop
